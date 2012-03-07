@@ -6,8 +6,26 @@ var ctx;
 
 function init() {
   var c = document.getElementById("myCanvas");
-  ctx = c.getContext("2d");
-  return setInterval(draw, 30);
+  var ctx = new CanvasXpress("myCanvas", {
+                  "venn": {
+                    "data": {
+                      "A": 340,
+                      "B": 562,
+                      "AB": 620
+                    },
+                    "legend": {
+                      "A": "Seth",
+                      "B": "Victoria"                      
+                    }
+                  }
+                }, {
+                  "graphType": "Venn",
+                  "background": "rgb(245,245,245)",
+                  "vennGroups": 2
+                });
+  //ctx = c.getContext("2d");
+  
+  //return setInterval(draw, 30);
 }
 
 function draw() {
