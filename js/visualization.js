@@ -14,14 +14,15 @@ function init() {
                       "AB": 620
                     },
                     "legend": {
-                      "A": "Seth",
-                      "B": "Victoria"                      
+                      "A": "Victoria",
+                      "B": "Seth"                      
                     }
                   }
                 }, {
                   "graphType": "Venn",
                   "background": "rgb(245,245,245)",
-                  "vennGroups": 2
+                  "vennGroups": 2,
+				  "vennColors": ["rgb(230,158,211)", "rgb(140,219,248)"]
                 });
   //ctx = c.getContext("2d");
   
