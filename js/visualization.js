@@ -14,17 +14,21 @@ function init() {
                       "AB": 620
                     },
                     "legend": {
-                      "A": "Seth",
-                      "B": "Victoria"                      
+                      "A": "Victoria",
+                      "B": "Seth"                      
                     }
                   }
                 }, {
                   "graphType": "Venn",
                   "background": "rgb(245,245,245)",
                   "vennGroups": 2,
+
 				  "title": "People Like Me",
 				  "legendColor": "blue",				  
 				  "fontSize": 40
+
+				  "vennColors": ["rgb(230,158,211)", "rgb(140,219,248)"]
+
                 });
   //ctx = c.getContext("2d");
   
