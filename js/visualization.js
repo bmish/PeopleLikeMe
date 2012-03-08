@@ -25,7 +25,7 @@ function init() {
 
 				  "title": "People Like Me",
 				  "legendColor": "blue",				  
-				  "fontSize": 40
+				  "fontSize": 40,
 
 				  "vennColors": ["rgb(230,158,211)", "rgb(140,219,248)"]
 
