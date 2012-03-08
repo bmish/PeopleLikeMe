@@ -1,48 +1,40 @@
-var x = 0;
-var y = 0;
-var dx = 2;
-var dy = 4;
-var ctx;
+var diagramElement;
+var currentCount;
+var CHART_URL = "http://chart.apis.google.com/chart?chs=540x540&cht=v&chco=00B1F077,E69ED374&chds=0,294&chdl=Seth|Victoria&chma=5|5&chts=000000,35";
+var TITLE_VAR = "&chtt=";
+var DATA_VAR = "&chd=t:";
 
 function init() {
-  var c = document.getElementById("myCanvas");
-  ctx = new CanvasXpress("myCanvas", {
-                  "venn": {
-                    "data": {
-                      "A": 114,
-                      "B": 294,
-                      "AB": 41
-                    },
-                    "legend": {
-                      "A": "Victoria",
-                      "B": "Seth"                      
-                    }
-                  }
-                }, {
-                  "graphType": "Venn",
-                  "background": "rgb(245,245,245)",
-                  "vennGroups": 2,
-
-				  "title": "People Like Me",
-				  "legendColor": "blue",				  
-				  "fontSize": 40,
-
-				  "vennColors": ["rgb(230,158,211)", "rgb(140,219,248)"]
-
-                });
-  //ctx = c.getContext("2d");
-  
-  //return setInterval(draw, 30);
+	diagramElement = null;
+	currentCount = 0;
 }
 
-function draw() {
-  ctx.clearRect(0,0,1000,800);
-  ctx.beginPath();
-  ctx.arc(x, y, 10, 0, Math.PI*2, true); 
-  ctx.closePath();
-  ctx.fill();
-  x += dx;
-  y += dy;
+function getUrl(title, data) {
+	return CHART_URL + TITLE_VAR + title + DATA_VAR + data;
+}
+
+function updateDiagram(title, data) {
+	var im = new Image();
+	im.src = getUrl(title, data);
+	diagramElement.src = im.src;
+}
+
+function checkInit() {
+	if (!diagramElement) {
+		diagramElement = document.getElementById("vennDiagram");
+	}
+}
+
+function goBack() {
+	checkInit();
+	
+	updateDiagram(--currentCount,"294,114,-1,41,-1,-1,-1");	
+}
+
+function goForward() {
+	checkInit();
+	
+	updateDiagram(++currentCount,"294,114,-1,41,-1,-1,-1");
 }
 
 init();

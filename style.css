@@ -12,7 +12,25 @@ body {
 	margin-right: auto;
 }
 
-#canvas {
+.vennDiagram {
+	margin-top: 100px;
+	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+#backButton {
+	float: left;
+}
+
+#forwardButton {	
+	float: right;
+}
+
+.navigationButton {
+	margin-top: 260px;
+}
+
+.navigationButton:hover {
+	cursor: pointer;
 }
