@@ -6,7 +6,7 @@ var ctx;
 
 function init() {
   var c = document.getElementById("myCanvas");
-  var ctx = new CanvasXpress("myCanvas", {
+  ctx = new CanvasXpress("myCanvas", {
                   "venn": {
                     "data": {
                       "A": 340,
@@ -21,7 +21,10 @@ function init() {
                 }, {
                   "graphType": "Venn",
                   "background": "rgb(245,245,245)",
-                  "vennGroups": 2
+                  "vennGroups": 2,
+				  "title": "People Like Me",
+				  "legendColor": "blue",				  
+				  "fontSize": 40
                 });
   //ctx = c.getContext("2d");
   
