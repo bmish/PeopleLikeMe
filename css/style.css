@@ -19,23 +19,37 @@ body {
 	margin-right: auto;
 }
 
-#backButtonDiv {
-	float: left;
+#sliderDiv {
+	margin-top:90px;
+	text-align: center;
 }
 
-#forwardButtonDiv {	
-	float: right;
+#slider {
+	width: 500px;
 }
 
-#rightArrow {
-	display: none;
+#titleSection{ 
+	margin-top: 60px;
+	font-family: helvetica;
+	font-size: 26pt;
+	text-align:center;
 }
 
-.navigationButton {
-	width: 100px;
-	margin-top: 260px;
+#person1name {
+	color: #88daf8;
 }
 
-.navigationButton:hover {
-	cursor: pointer;
+#person2name {
+	color: #f4d3eb;
+}
+
+#sharedCount {
+	color: #b3bfe7;
+}
+
+#dateText {
+	margin-top: 10px;
+	font-size: 14pt;
+	font-family: helvetica;
+	text-align:center;
 }

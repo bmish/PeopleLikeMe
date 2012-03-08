@@ -1,10 +1,13 @@
-var CHART_URL = "http://chart.apis.google.com/chart?chs=540x540&cht=v&chco=00B1F077,E69ED374&chds=0,294&chdl=Seth|Victoria&chma=5|5&chts=000000,35";
+var CHART_URL = "http://chart.apis.google.com/chart?chs=540x450&cht=v&chco=00B1F077,E69ED374&chds=0,294&chma=5|5&chts=000000,35";
 var TITLE_VAR = "&chtt=";
 var DATA_VAR = "&chd=t:";
 var MS_IN_MONTH = 1000 * 60 * 60 * 24 * 30;
+var SLIDER_RANGE = 100;
+var SLIDER_VALUES_PER_MONTH = 2;
 
-var rightArrowElement;
+var sliderElement;
 var diagramElement;
+
 var diagramDate;
 var startDate;
 
@@ -88,9 +91,12 @@ function processJSON() {
 }
 
 function init() {
+	sliderElement = null;
 	diagramElement = null;
 	diagramDate = new Date();
 	startDate = new Date();
+	endDate = new Date();
+	endDate.setTime(startDate - SLIDER_RANGE * MS_IN_MONTH / SLIDER_VALUES_PER_MONTH);
 	
 	sizeCircle1 = 0;
 	sizeCircle2 = 0;
@@ -99,12 +105,12 @@ function init() {
 	jQuery.getJSON("likes/seth.json", retrievedPerson1JSON);
 }
 
-function getDataString() {
+function getUrlDataString() {
 	return sizeCircle1 + "," + sizeCircle2 + ",-1," + sizeOverlap + ",-1,-1,-1";
 }
 
 function getUrl() {
-	return CHART_URL + TITLE_VAR + $.datepicker.formatDate("MM yy", diagramDate) + DATA_VAR + getDataString();
+	return CHART_URL + DATA_VAR + getUrlDataString();
 }
 
 function updateDiagram() {
@@ -116,21 +122,10 @@ function updateDiagram() {
 	sizeCircle2 = getLikesCount(person2Likes, diagramDate);
 	sizeOverlap = getCommonLikesCount(person1Likes, person2Likes, diagramDate);
 	
+	document.getElementById("sharedCount").innerText = sizeOverlap;
+	document.getElementById("dateText").innerText = $.datepicker.formatDate("MM yy", diagramDate);
+	
 	updateImage();
-	
-	showRightArrowIfNecessary();
-}
-
-function showRightArrowIfNecessary() {
-	if (!rightArrowElement) {
-		rightArrowElement = document.getElementById("rightArrow");
-	}
-	
-	if (diagramDate.getTime() >= startDate.getTime()) {
-		rightArrowElement.style.display = "none";
-	} else {
-		rightArrowElement.style.display = "block";
-	}
 }
 
 function updateImage() {
@@ -139,14 +134,8 @@ function updateImage() {
 	diagramElement.src = im.src;
 }
 
-function goBack() {
-	diagramDate.setTime(diagramDate.getTime() - MS_IN_MONTH);
-	
-	updateDiagram();	
-}
-
-function goForward() {
-	diagramDate.setTime(diagramDate.getTime() + MS_IN_MONTH);
+function rangeUpdated(newValue) {
+	diagramDate.setTime(startDate.getTime() - (SLIDER_RANGE-newValue) * MS_IN_MONTH / SLIDER_VALUES_PER_MONTH);
 	
 	updateDiagram();
 }

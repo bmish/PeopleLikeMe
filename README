@@ -1,0 +1,4 @@
+This project contains two visualizations of a Facebook mutual "likes" venn diagram.
+
+1. Open index.html for a timeline visualization using real data.
+2. Open the Processing project sketch_mar07a for an animated demo using dummy data.

@@ -11,9 +11,10 @@
 <body>
 	<div id="wrapper">
 			<div id="page">
-				<div id="backButtonDiv" class="navigationButton" onclick="goBack()"><img src="images/arrow-left.png" height="50" alt="Back one month" title="Back one month" id="leftArrow" /></div>
-				<div id="forwardButtonDiv" class="navigationButton" onclick="goForward()"><img src="images/arrow-right.png" height="50" alt="Forward one month" title="Forward one month" id="rightArrow" /></div>
+				<div id="titleSection"><span id="person2name">Victoria</span> and <span id="person1name">Seth</span> share <span id="sharedCount"></span> likes</div><div id="dateText"></div>
 				<img id="vennDiagram" class="vennDiagram" src="#" alt="Venn diagram comparing Facebook likes" title="Venn diagram comparing Facebook likes" />
+				<div id="sliderDiv"><input type="range" id="slider" min="0" max="100" value="100" onchange="rangeUpdated(this.value)" /></div>
+				
 			</div>
 	</div>	
 </body>
