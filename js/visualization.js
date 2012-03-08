@@ -3,8 +3,10 @@ var TITLE_VAR = "&chtt=";
 var DATA_VAR = "&chd=t:";
 var MS_IN_MONTH = 1000 * 60 * 60 * 24 * 30;
 
+var rightArrowElement;
 var diagramElement;
 var diagramDate;
+var startDate;
 
 var sizeCircle1;
 var sizeCircle2;
@@ -88,6 +90,7 @@ function processJSON() {
 function init() {
 	diagramElement = null;
 	diagramDate = new Date();
+	startDate = new Date();
 	
 	sizeCircle1 = 0;
 	sizeCircle2 = 0;
@@ -114,6 +117,20 @@ function updateDiagram() {
 	sizeOverlap = getCommonLikesCount(person1Likes, person2Likes, diagramDate);
 	
 	updateImage();
+	
+	showRightArrowIfNecessary();
+}
+
+function showRightArrowIfNecessary() {
+	if (!rightArrowElement) {
+		rightArrowElement = document.getElementById("rightArrow");
+	}
+	
+	if (diagramDate.getTime() >= startDate.getTime()) {
+		rightArrowElement.style.display = "none";
+	} else {
+		rightArrowElement.style.display = "block";
+	}
 }
 
 function updateImage() {

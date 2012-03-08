@@ -19,15 +19,20 @@ body {
 	margin-right: auto;
 }
 
-#backButton {
+#backButtonDiv {
 	float: left;
 }
 
-#forwardButton {	
+#forwardButtonDiv {	
 	float: right;
 }
 
+#rightArrow {
+	display: none;
+}
+
 .navigationButton {
+	width: 100px;
 	margin-top: 260px;
 }
 

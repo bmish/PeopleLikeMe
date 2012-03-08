@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>People Like Me</title>
-	<link href="style.css" rel="stylesheet" type="text/css">
+	<link href="css/style.css" rel="stylesheet" type="text/css">
 	<script src="js/jquery-1.7.1.min.js"></script>
 	<script src="js/jquery-ui-1.8.18.custom.min.js"></script>
 	<script src="js/visualization.js"></script>
@@ -11,8 +11,8 @@
 <body>
 	<div id="wrapper">
 			<div id="page">
-				<div id="backButton" class="navigationButton" onclick="goBack()"><img src="images/arrow-left.png" height="50" alt="Back one month" title="Back one month" /></div>
-				<div id="forwardButton" class="navigationButton" onclick="goForward()"><img src="images/arrow-right.png" height="50" alt="Forward one month" title="Forward one month" /></div>
+				<div id="backButtonDiv" class="navigationButton" onclick="goBack()"><img src="images/arrow-left.png" height="50" alt="Back one month" title="Back one month" id="leftArrow" /></div>
+				<div id="forwardButtonDiv" class="navigationButton" onclick="goForward()"><img src="images/arrow-right.png" height="50" alt="Forward one month" title="Forward one month" id="rightArrow" /></div>
 				<img id="vennDiagram" class="vennDiagram" src="#" alt="Venn diagram comparing Facebook likes" title="Venn diagram comparing Facebook likes" />
 			</div>
 	</div>	
