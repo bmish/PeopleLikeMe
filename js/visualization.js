@@ -9,9 +9,9 @@ function init() {
   ctx = new CanvasXpress("myCanvas", {
                   "venn": {
                     "data": {
-                      "A": 340,
-                      "B": 562,
-                      "AB": 620
+                      "A": 114,
+                      "B": 294,
+                      "AB": 41
                     },
                     "legend": {
                       "A": "Victoria",
