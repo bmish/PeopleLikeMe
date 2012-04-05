@@ -2,62 +2,123 @@ body {
 	margin: 0;
 }
 
-#visualizationWrapper {
-	width: 100%;
-	display: none;
+@media screen {
+	#visualizationWrapper {
+		width: 100%;
+		display: none;
+	}
+	
+	#titleSection{ 
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 60px;
+		font-family: helvetica;
+		font-size: 26pt;
+		text-align:center;
+	}
+	
+	#dateText {
+		margin-top: 10px;
+		font-size: 14pt;
+		font-family: helvetica;
+		text-align:center;
+	}
+	
+	#page {
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#vennDiagram {
+		margin-top: 100px;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	#loginWrapper {
+		width: 100%;
+		margin-top: 30px;
+		margin-bottom: 20px;
+		text-align:center;
+	}
+	
+	#sliderDiv {
+		margin-top:90px;
+		text-align: center;
+	}
 }
 
-#loginWrapper {
-	width: 100%;
-	margin-top: 30px;
-	margin-bottom: 20px;
-	text-align:center;
-}
-
-#page {
-	width: 1000px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.vennDiagram {
-	margin-top: 100px;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#sliderDiv {
-	margin-top:90px;
-	text-align: center;
+@media all and (max-device-width:480px) {
+	#visualizationWrapper {
+		width: 100%;
+		display: none;
+		margin: 0;
+	}
+	
+	#titleSection{
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 30px;
+		font-family: helvetica;
+		font-size: 26pt;
+		text-align:center;
+	}
+	
+	#dateText {
+		margin-top: 20px;
+		font-size: 12pt;
+		font-family: helvetica;
+		text-align:center;
+	}
+	
+	#page {
+		width:100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	#vennDiagram {
+		margin-top: 30px;
+		margin-bottom: 0;
+		margin-left: 0;
+		margin-right: 0;
+		width:100%;
+		display: block;
+	}
+	
+	#loginWrapper {
+		margin: 0;
+		width: 100%;
+		text-align:center;
+	}
+	
+	#sliderDiv {
+		text-align: center;
+	}
+	
+	#friendSelectorWrapper {
+		margin: 0;
+	}
+	
+	#fbLoginButton {
+		margin: 0;
+	}
 }
 
 #slider {
 	width: 500px;
 }
 
-#titleSection{ 
-	margin-top: 60px;
-	font-family: helvetica;
-	font-size: 26pt;
-	text-align:center;
-}
-
 #person1name {
-	color: #88daf8;
+	color: #FFDDAD;
 }
 
 #person2name {
-	color: #f4d3eb;
+	color: #A5C9EB;
 }
 
 #sharedCount {
-	color: #b3bfe7;
-}
-
-#dateText {
-	margin-top: 10px;
-	font-size: 14pt;
-	font-family: helvetica;
-	text-align:center;
+	color: #D2D3CC;
 }

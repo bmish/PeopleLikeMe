@@ -1,9 +1,10 @@
-var CHART_URL = "http://chart.apis.google.com/chart?chs=540x450&cht=v&chco=00B1F077,E69ED374&chds=0,294&chma=5|5&chts=000000,35";
 var TITLE_VAR = "&chtt=";
 var DATA_VAR = "&chd=t:";
 var MS_IN_MONTH = 1000 * 60 * 60 * 24 * 30;
 var SLIDER_RANGE = 100;
 var SLIDER_VALUES_PER_MONTH = 2;
+var MAX_VENNDIAGRAM_WIDTH = 540;
+var MAX_VENNDIAGRAM_HEIGHT = 450;
 
 var facebookId1;
 var facebookId2;
@@ -22,6 +23,44 @@ var person1Obj;
 var person2Obj;
 var person1Likes;
 var person2Likes;
+
+function hideAddressBar() // http://mobile.tutsplus.com/tutorials/mobile-web-apps/remove-address-bar/
+{
+  if(!window.location.hash)
+  {
+      if(document.height < window.outerHeight)
+      {
+          document.body.style.height = (window.outerHeight + 50) + 'px';
+      }
+
+      setTimeout( function(){ window.scrollTo(0, 1); }, 50 );
+  }
+}
+
+if (onMobileDevice()) {
+	window.addEventListener("load", function(){ if(!window.pageYOffset){ hideAddressBar(); } } );
+	window.addEventListener("orientationchange", hideAddressBar );
+}
+
+function chooseImageWidth() {
+	if (screen.availWidth > MAX_VENNDIAGRAM_WIDTH) {
+		return MAX_VENNDIAGRAM_WIDTH;
+	}
+	
+	return screen.availWidth;
+}
+
+function chooseImageHeight() {
+	if (screen.availWidth > MAX_VENNDIAGRAM_WIDTH) {
+		return MAX_VENNDIAGRAM_HEIGHT;
+	}
+	
+	return Math.round(screen.availWidth * 0.83);
+}
+
+function getChartURL() {
+	return "http://chart.apis.google.com/chart?chs="+chooseImageWidth()+"x"+chooseImageHeight()+"&cht=v&chco=FFDDAD,A5C9EB&chds=0,294&chma=5|5&chts=000000,35";
+}
 
 function getLikesCount(likes, beforeDate) {
 	var count = 0;
@@ -105,6 +144,15 @@ function processJSON() {
 	$("#visualizationWrapper").show();
 }
 
+function onMobileDevice() {
+	return navigator.userAgent.match(/Android/i)
+	 || navigator.userAgent.match(/webOS/i)
+	 || navigator.userAgent.match(/iPhone/i)
+	 || navigator.userAgent.match(/iPad/i)
+	 || navigator.userAgent.match(/iPod/i)
+	 || navigator.userAgent.match(/BlackBerry/i);
+}
+
 function init() {
 	sliderElement = null;
 	diagramElement = null;
@@ -121,7 +169,7 @@ function init() {
 	$("#visualizationWrapper").hide();
 	
 	// Show friend picker.
-	TDFriendSelector.init({debug: true});
+	TDFriendSelector.init();
 	var selector1 = TDFriendSelector.newInstance({
 	    callbackSubmit: function(selectedFriendIds) {
 			if (selectedFriendIds.length == 1) { // Compare friend to myself.
@@ -140,7 +188,9 @@ function init() {
 
 			// Get likes in serial.
 			FB.api("/"+ facebookId1 +"/likes", retrievedPerson1Likes);
-	    }
+	    },
+		maxSelection: 2, 
+		friendsPerPage: onMobileDevice() ? 6 : 10
 	});
     selector1.showFriendSelector();
 }
@@ -150,7 +200,7 @@ function getUrlDataString() {
 }
 
 function getUrl() {
-	return CHART_URL + DATA_VAR + getUrlDataString();
+	return getChartURL() + DATA_VAR + getUrlDataString();
 }
 
 function updateDiagram() {

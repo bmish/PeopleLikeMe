@@ -2,6 +2,7 @@
 <html lang="en-US">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 	<title>People Like Me</title>
 	<link href="css/style.css" rel="stylesheet" type="text/css">
 	<script src="js/jquery-1.7.1.min.js"></script>
@@ -49,7 +50,7 @@
 						<p>Select friends to compare</p>
 					</div>
 					<div class="TDFriendSelector_content">
-						<p>Choose one friend to compare to yourself.</p>
+						<p>Or choose one friend to compare to yourself.</p>
 						<div class="TDFriendSelector_searchContainer TDFriendSelector_clearfix">
 							<div class="TDFriendSelector_selectedCountContainer"><span class="TDFriendSelector_selectedCount">0</span> / <span class="TDFriendSelector_selectedCountMax">0</span> friends selected</div>
 							<input type="text" placeholder="Search friends" id="TDFriendSelector_searchField" />
@@ -70,7 +71,7 @@
 	</div>
 	
 	<div id="loginWrapper">
-		<fb:login-button autologoutlink='true' show-faces='false' scope='user_likes,friends_likes'></fb:login-button>
+		<fb:login-button id="fbLoginButton" autologoutlink='true' show-faces='false' scope='user_likes,friends_likes'></fb:login-button>
 	</div>
 		
 </body>
