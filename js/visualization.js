@@ -153,6 +153,10 @@ function onMobileDevice() {
 	 || navigator.userAgent.match(/BlackBerry/i);
 }
 
+function hideVisualization() {
+	$("#visualizationWrapper").hide();
+}
+
 function init() {
 	sliderElement = null;
 	diagramElement = null;
@@ -165,8 +169,7 @@ function init() {
 	sizeCircle2 = 0;
 	sizeOverlap = 0;
 	
-	// Hide visualization.
-	$("#visualizationWrapper").hide();
+	hideVisualization();
 	
 	// Show friend picker.
 	TDFriendSelector.init();
