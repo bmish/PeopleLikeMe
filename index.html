@@ -7,15 +7,71 @@
 	<script src="js/jquery-1.7.1.min.js"></script>
 	<script src="js/jquery-ui-1.8.18.custom.min.js"></script>
 	<script src="js/visualization.js"></script>
+	<script src="Facebook-friend-selector/tdfriendselector.js"></script>
+	<link href="Facebook-friend-selector/tdfriendselector.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<div id="wrapper">
+	<div id="fb-root"></div>
+	<script>
+	        window.fbAsyncInit = function() {
+	          FB.init({
+	            appId      : '216380391797178',
+	            status     : true, 
+	            cookie     : true,
+	            xfbml      : true,
+	            oauth      : true,
+	          });
+	
+				FB.Event.subscribe('auth.statusChange', init);
+	        };
+	        (function(d){
+	           var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+	           js = d.createElement('script'); js.id = id; js.async = true;
+	           js.src = "//connect.facebook.net/en_US/all.js";
+	           d.getElementsByTagName('head')[0].appendChild(js);
+	         }(document));
+	</script>
+	
+	<div id="visualizationWrapper">
 			<div id="page">
-				<div id="titleSection"><span id="person2name">Victoria</span> and <span id="person1name">Seth</span> share <span id="sharedCount"></span> likes</div><div id="dateText"></div>
+				<div id="titleSection"><span id="person1name"></span> and <span id="person2name"></span> share <span id="sharedCount"></span> likes</div><div id="dateText"></div>
 				<img id="vennDiagram" class="vennDiagram" src="#" alt="Venn diagram comparing Facebook likes" title="Venn diagram comparing Facebook likes" />
-				<div id="sliderDiv"><input type="range" id="slider" min="0" max="100" value="100" onchange="rangeUpdated(this.value)" /></div>
-				
+				<div id="sliderDiv"><input type="range" id="slider" min="0" max="100" value="100" onchange="rangeUpdated(this.value)" /></div>		
 			</div>
-	</div>	
+	</div>
+	
+	<div id="friendSelectorWrapper">
+		<div id="TDFriendSelector">
+			<div class="TDFriendSelector_dialog">
+				<a href="#" id="TDFriendSelector_buttonClose">x</a>
+				<div class="TDFriendSelector_form">
+					<div class="TDFriendSelector_header">
+						<p>Select friends to compare</p>
+					</div>
+					<div class="TDFriendSelector_content">
+						<p>Choose one friend to compare to yourself.</p>
+						<div class="TDFriendSelector_searchContainer TDFriendSelector_clearfix">
+							<div class="TDFriendSelector_selectedCountContainer"><span class="TDFriendSelector_selectedCount">0</span> / <span class="TDFriendSelector_selectedCountMax">0</span> friends selected</div>
+							<input type="text" placeholder="Search friends" id="TDFriendSelector_searchField" />
+						</div>
+						<div class="TDFriendSelector_friendsContainer"></div>
+					</div>
+					<div class="TDFriendSelector_footer TDFriendSelector_clearfix">
+						<a href="#" id="TDFriendSelector_pagePrev" class="TDFriendSelector_disabled">Previous</a>
+						<a href="#" id="TDFriendSelector_pageNext">Next</a>
+						<div class="TDFriendSelector_pageNumberContainer">
+							Page <span id="TDFriendSelector_pageNumber">1</span> / <span id="TDFriendSelector_pageNumberTotal">1</span>
+						</div>
+						<a href="#" id="TDFriendSelector_buttonOK">OK</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="loginWrapper">
+		<fb:login-button autologoutlink='true' show-faces='false' scope='user_likes,friends_likes'></fb:login-button>
+	</div>
+		
 </body>
 </html>

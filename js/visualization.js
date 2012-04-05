@@ -5,6 +5,9 @@ var MS_IN_MONTH = 1000 * 60 * 60 * 24 * 30;
 var SLIDER_RANGE = 100;
 var SLIDER_VALUES_PER_MONTH = 2;
 
+var facebookId1;
+var facebookId2;
+
 var sliderElement;
 var diagramElement;
 
@@ -16,8 +19,8 @@ var sizeCircle2;
 var sizeOverlap;
 
 var person1Obj;
-var person1Likes;
 var person2Obj;
+var person1Likes;
 var person2Likes;
 
 function getLikesCount(likes, beforeDate) {
@@ -71,23 +74,35 @@ function getCommonLikesCount(likes1, likes2, beforeDate) {
 	return commonCount;
 }
 
-function retrievedPerson1JSON(data) {
+function retrievedPerson1Likes(data) {
 	person1Obj = data;
 	
-	jQuery.getJSON("likes/victoria.json", retrievedPerson2JSON);
+	// Now get likes for person 2.
+	FB.api("/"+ facebookId2 +"/likes", retrievedPerson2Likes);
 }
 
-function retrievedPerson2JSON(data) {
+function retrievedPerson2Likes(data) {
 	person2Obj = data;
 	
+	// Done getting likes so process them now.
 	processJSON();
 }
 
+function retrievedPerson1Info(data) {
+	$("#person1name").text(data.name);
+}
+
+function retrievedPerson2Info(data) {
+	$("#person2name").text(data.name);
+}
+
 function processJSON() {
-	person1Likes = person1Obj['data']
+	person1Likes = person1Obj['data'];
 	person2Likes = person2Obj['data'];
 	
 	updateDiagram();	
+	
+	$("#visualizationWrapper").show();
 }
 
 function init() {
@@ -102,7 +117,32 @@ function init() {
 	sizeCircle2 = 0;
 	sizeOverlap = 0;
 	
-	jQuery.getJSON("likes/seth.json", retrievedPerson1JSON);
+	// Hide visualization.
+	$("#visualizationWrapper").hide();
+	
+	// Show friend picker.
+	TDFriendSelector.init({debug: true});
+	var selector1 = TDFriendSelector.newInstance({
+	    callbackSubmit: function(selectedFriendIds) {
+			if (selectedFriendIds.length == 1) { // Compare friend to myself.
+				facebookId1 = selectedFriendIds[0];
+				facebookId2 = "me";
+			} else if (selectedFriendIds.length == 2) { // Compare two friends.
+				facebookId1 = selectedFriendIds[0];
+				facebookId2 = selectedFriendIds[1];
+			} else {
+				return;
+			}
+			
+			// Fill in names in parallel.
+			FB.api("/" + facebookId1, retrievedPerson1Info);
+			FB.api("/" + facebookId2, retrievedPerson2Info);
+
+			// Get likes in serial.
+			FB.api("/"+ facebookId1 +"/likes", retrievedPerson1Likes);
+	    }
+	});
+    selector1.showFriendSelector();
 }
 
 function getUrlDataString() {
@@ -140,4 +180,8 @@ function rangeUpdated(newValue) {
 	updateDiagram();
 }
 
-init();
+function $_GET(q,s) { // http://www.onlineaspect.com/2009/06/10/reading-get-variables-with-javascript/
+        s = s ? s : window.location.search; 
+        var re = new RegExp('&'+q+'(?:=([^&]*))?(?=&|$)','i'); 
+        return (s=s.replace(/^?/,'&').match(re)) ? (typeof s[1] == 'undefined' ? '' : decodeURIComponent(s[1])) : undefined; 
+}
